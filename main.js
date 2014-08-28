@@ -5,6 +5,9 @@ function Achat(typeOp, locale, montant){
 	this.montant = montant
 }
 
+//Public methods
+
+// Calculate notary compensation
 Achat.prototype.calculerEmolument = function(){
 	// Set minimum to 87.31
 	var emolument = 87.31
@@ -47,6 +50,7 @@ Achat.prototype.calculerEmolument = function(){
 	return fraisTotal > emolument ? fraisTotal : emolument
 }
 
+// Calculate registration fees
 Achat.prototype.calculerDroits = function(){
 	// If property type is not new, fee changes according to location
 	if(this.typeOp != "neuf"){
@@ -76,8 +80,9 @@ Achat.prototype.calculerDroits = function(){
 	return droits
 }
 
-// Public method calculate total
+// Calculate total
 Achat.prototype.calculerTotal = function(){
+	// 1000 euro fixed fee
 	fixe = 1000
 	publication = this.montant * (0.1/100)
 	return this.calculerEmolument() + fixe + publication + (this.montant * this.calculerDroits())
